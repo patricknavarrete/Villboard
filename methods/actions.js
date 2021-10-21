@@ -1,9 +1,12 @@
 var User = require('../models/user')
 var Suggestion = require ('../models/suggestion')
 var Visitor = require ('../models/visitor')
+var Payment = require ('../models/payment')
+var Upload = require ('../middleware/upload')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 var bcrypt = require('bcrypt')
+
 
 var functions = {
     addNew: function (req, res) {
@@ -40,6 +43,44 @@ var functions = {
         }
     },
 
+    addPayment: function (req, res) {
+        if ((!req.body.firstName) || 
+        (!req.body.lastName) ||  
+        (!req.body.address) || 
+        (!req.body.email) ||
+        (!req.body.phoneNumber ) ||
+        (!req.body.refNumber) ||
+        (!req.body.typeTransaction)
+        
+        ) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+            var newPayment = Payment({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                address: req.body.address,
+                email: req.body.email,
+                phoneNumber: req.body.phoneNumber,
+                refNumber: req.body.refNumber,
+                typeTransaction: req.body.typeTransaction,
+                proofPayment: req.body.proofPayment
+
+            });
+            if(req.file){
+                newPayment.proofPayment = req.file.path
+            }
+            newPayment.save(function (err, newPayment) {
+                if (err) {
+                    res.json({success: false, msg: 'Failed to save'})
+                }
+                else {
+                    res.json({success: true, msg: 'Successfully saved'})
+                }
+            })
+        }
+    },
+
     
     addNewSuggestion: function (req,res){
         if ((!req.body.suggestions))
@@ -63,8 +104,8 @@ var functions = {
 
         }
     },
-    
-     addNewVisitor: function (req, res) {
+
+        addNewVisitor: function (req, res) {
             if ((!req.body.fullName) ||   
             (!req.body.emailV) || 
             (!req.body.address) ||
@@ -140,8 +181,8 @@ var functions = {
             }
         })
     },
-    
-        postSuggestions: function (req,res){
+
+    postSuggestions: function (req,res){
         Suggestion.find({}, function(err,documents){
             if(err){
                 res.send('Something went wrong');
@@ -151,8 +192,8 @@ var functions = {
             }
         })
     },
-    
-        postVisitors: function (req,res){
+
+    postVisitors: function (req,res){
         Visitor.find({}, function(err, documents){
             if(err){
                 res.send('Something went wrong');
@@ -339,6 +380,9 @@ var functions = {
              })
     
         },
+
+
+
 
 
     
