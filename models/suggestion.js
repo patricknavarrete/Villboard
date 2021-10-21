@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 var suggestionSchema = new Schema({
     name:{
         type: String,
-        require: true,
     },
     suggestions: {
         type: String,
