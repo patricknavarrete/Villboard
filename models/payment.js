@@ -3,24 +3,24 @@ var Schema = mongoose.Schema;
 
 
 var paymentSchema = new Schema ({
-    firstName: {
+    uFirstName: {
         type: String,
         require: true,
     },
-    lastName: {
+    uLastName: {
         type: String,
         require: true,
     },
-    address:{
+    uAddress:{
         type: String,
         require: true,
     },
-    email: {
+    uEmail: {
         type: String,
         require: true,
         email: true,
     },
-    phoneNumber:{
+    uPhoneNumber:{
         type: String,
         require: true,
     },
