@@ -83,16 +83,15 @@ var functions = {
 
     
     addNewSuggestion: function (req,res){
-        if ((!req.body.suggestions))
+        if ((!req.body.suggestions) )
         {
             res.json ({success: false, msg: 'please enter your report'})
         } 
         else {
             var newSuggestion = Suggestion({
-                name: req.body.name,
+                aName: req.body.aName,
                 suggestions: req.body.suggestions
             });
-
             newSuggestion.save(function(err,newSuggestion){
                 if (err){
                     res.json({success: false, msg: 'Failed to save suggestion'})
