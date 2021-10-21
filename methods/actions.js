@@ -44,11 +44,11 @@ var functions = {
     },
 
     addPayment: function (req, res) {
-        if ((!req.body.firstName) || 
-        (!req.body.lastName) ||  
-        (!req.body.address) || 
-        (!req.body.email) ||
-        (!req.body.phoneNumber ) ||
+        if ((!req.body.uFirstName) || 
+        (!req.body.uLastName) ||  
+        (!req.body.uAddress) || 
+        (!req.body.uEmail) ||
+        (!req.body.uPhoneNumber ) ||
         (!req.body.refNumber) ||
         (!req.body.typeTransaction)
         
@@ -57,14 +57,14 @@ var functions = {
         }
         else {
             var newPayment = Payment({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                address: req.body.address,
-                email: req.body.email,
-                phoneNumber: req.body.phoneNumber,
+                uFirstName: req.body.uFirstName,
+                uLastName: req.body.uLastName,
+                uAddress: req.body.uAddress,
+                uEmail: req.body.uEmail,
+                uPhoneNumber: req.body.uPhoneNumber,
                 refNumber: req.body.refNumber,
                 typeTransaction: req.body.typeTransaction,
-                proofPayment: req.body.proofPayment
+                proofPayment: req.body.proofPayment,
 
             });
             if(req.file){
