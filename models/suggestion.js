@@ -3,8 +3,9 @@ var Schema = mongoose.Schema;
 
 
 var suggestionSchema = new Schema({
-    name:{
+    aName:{
         type: String,
+        require: true,
     },
     suggestions: {
         type: String,
